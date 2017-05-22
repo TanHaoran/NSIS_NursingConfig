@@ -1,0 +1,12 @@
+/**index.wxss**/
+.container {
+    padding: 20rpx;
+}
+
+.apply-info {
+    margin-top: 350rpx;
+}
+
+.apply-btn {
+    margin-top: 100rpx
+}

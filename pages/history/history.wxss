@@ -1,0 +1,34 @@
+.container {
+    padding: 40rpx;
+}
+
+.item {
+    border: 1rpx solid #2E96CC;
+    padding: 10rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rpx;
+}
+
+.item-applicant {
+    height: 60prx;
+    line-height: 60rpx;
+}
+
+.item-time {
+    height: 60prx;
+    line-height: 60rpx;
+    
+}
+
+.item-name {
+    height: 60prx;
+    line-height: 60rpx;
+}
+
+.item-desc {
+    line-height: 60rpx;
+}
+
+

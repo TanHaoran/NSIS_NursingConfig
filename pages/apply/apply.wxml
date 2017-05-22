@@ -1,0 +1,37 @@
+<!--apply.wxml-->
+<view class="container">
+
+
+  <view class="line">
+    <text class="line-text">医院名</text>
+    <input class="line-input" type="text"/>
+  </view>
+
+  <view class="line">
+    <text class="line-text">科室</text>
+    <input class="line-input" type="text"/>
+  </view>
+
+  <view class="line">
+    <text class="line-text">申请人</text>
+    <input class="line-input" type="text"/>
+  </view>
+
+  <view class="line">
+    <text class="line-text">联系电话</text>
+    <input class="line-input" type="number"/>
+  </view>
+
+  <view class="line">
+    <text class="line-text">申请项目</text>
+    <input class="line-input" type="text"/>
+  </view>
+
+  <view class="line-desc">
+    <text class="line-text">描述</text>
+    <textarea class="desc-textarea"/>
+  </view>
+
+  <button type="primary" bindtap="onComplete">完成</button>
+
+</view>

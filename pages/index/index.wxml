@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+  <text class="apply-info">申请添加大屏主界面没有的护理项目，请认真填写！</text>
+  <button type="primary" class="apply-btn" bindtap="onApply">申请</button>
+</view>

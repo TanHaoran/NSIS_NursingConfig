@@ -1,0 +1,10 @@
+<!--logs.wxml-->
+<view class="container">
+    <view class="item" wx:for="{{histories}}">
+        <text class="item-applicant">申请人：{{item.applicant}}</text>
+        <text class="item-time">时间：{{item.time}}</text>
+        <text class="item-name">项目：{{item.name}}</text>
+        <text class="item-desc">描述：{{item.desc}}</text>    
+    </view>
+
+</view>

@@ -1,0 +1,48 @@
+/* apply.wxss */
+
+.container {
+  padding: 60rpx;
+}
+
+.line {
+  margin-bottom: 20rpx;
+  width: 630rpx;
+  height: 70rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.line-text {
+  line-height: 70rpx;
+  width: 170rpx;
+  text-align: right;
+}
+
+.line-input {
+  border: 1rpx solid gray;
+  margin-left: 30rpx;
+  width: 428rpx;
+  height: 62rpx;
+  padding: 4rpx;
+}
+
+.line-desc {
+  margin-bottom: 20rpx;
+  width: 630rpx;
+  height: 210rpx;
+  display: flex;
+  flex-direction: row;    
+}
+
+.desc-textarea {
+  border: 1rpx solid gray;
+  line-height: 70rpx;
+  margin-left: 30rpx;
+  width: 428rpx;
+  height: 202rpx;
+  padding: 4rpx;
+}
+
+button {
+    margin-top: 100rpx;
+}
