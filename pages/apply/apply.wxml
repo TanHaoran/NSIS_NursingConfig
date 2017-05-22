@@ -1,37 +1,36 @@
 <!--apply.wxml-->
-<view class="container">
 
-
+<form class="container" bindsubmit="onSubmit">
   <view class="line">
     <text class="line-text">医院名</text>
-    <input class="line-input" type="text"/>
+    <input class="line-input" type="text" name="hospital"/>
   </view>
 
   <view class="line">
     <text class="line-text">科室</text>
-    <input class="line-input" type="text"/>
+    <input class="line-input" type="text" name="office"/>
   </view>
 
   <view class="line">
     <text class="line-text">申请人</text>
-    <input class="line-input" type="text"/>
+    <input class="line-input" type="text" name="applicant"/>
   </view>
 
   <view class="line">
     <text class="line-text">联系电话</text>
-    <input class="line-input" type="number"/>
+    <input class="line-input" type="number" name="telephone"/>
   </view>
 
   <view class="line">
     <text class="line-text">申请项目</text>
-    <input class="line-input" type="text"/>
+    <input class="line-input" type="text" name="name"/>
   </view>
 
   <view class="line-desc">
     <text class="line-text">描述</text>
-    <textarea class="desc-textarea"/>
+    <textarea class="desc-textarea" name="desc"/>
   </view>
 
-  <button type="primary" bindtap="onComplete">完成</button>
+  <button form-type="submit" type="primary">提交</button>
 
-</view>
+</form>

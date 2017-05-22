@@ -11,18 +11,7 @@
     margin-bottom: 20rpx;
 }
 
-.item-applicant {
-    height: 60prx;
-    line-height: 60rpx;
-}
-
-.item-time {
-    height: 60prx;
-    line-height: 60rpx;
-    
-}
-
-.item-name {
+.item-text {
     height: 60prx;
     line-height: 60rpx;
 }
