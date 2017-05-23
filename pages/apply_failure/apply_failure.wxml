@@ -1,0 +1,6 @@
+<!--apply_failure.wxml-->
+
+<view class="container-apply-result">
+  <icon size="100" type="warn" />
+  <text class="text-apply-result">{{failureText}}</text>
+</view>

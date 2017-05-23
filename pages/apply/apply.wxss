@@ -1,48 +1,46 @@
 /* apply.wxss */
 
 .container {
-  padding: 60rpx;
+  padding-top: 40rpx;
+  background: #efefef;
 }
 
 .line {
-  margin-bottom: 20rpx;
-  width: 630rpx;
-  height: 70rpx;
-  display: flex;
-  flex-direction: row;
+  margin-bottom: 30rpx;
+  width: 750rpx;
 }
 
 .line-text {
-  line-height: 70rpx;
-  width: 170rpx;
-  text-align: right;
+  padding-left: 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 18px;
+  color: #888;
 }
 
 .line-input {
-  border: 1rpx solid gray;
-  margin-left: 30rpx;
-  width: 428rpx;
-  height: 62rpx;
-  padding: 4rpx;
+  background: #fff;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  height: 44px;
+  padding-left: 20rpx;
+  font-size: 18px;
 }
 
-.line-desc {
-  margin-bottom: 20rpx;
-  width: 630rpx;
-  height: 210rpx;
-  display: flex;
-  flex-direction: row;    
-}
-
-.desc-textarea {
-  border: 1rpx solid gray;
-  line-height: 70rpx;
-  margin-left: 30rpx;
-  width: 428rpx;
-  height: 202rpx;
-  padding: 4rpx;
+.line-textarea {
+  background: #fff;
+  border-top: 1rpx solid #d9d9d9;
+  border-bottom: 1rpx solid #d9d9d9;
+  line-height: 44px;
+  width: 710rpx;
+  height: 130rpx;
+  padding: 20rpx;
+  font-size: 18px;
 }
 
 button {
-    margin-top: 100rpx;
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  width: 710rpx;
 }

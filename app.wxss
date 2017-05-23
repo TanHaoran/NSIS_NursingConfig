@@ -1,4 +1,5 @@
 /**app.wxss**/
+
 .container {
   height: 100%;
   display: flex;
@@ -7,8 +8,21 @@
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box;
-} 
+}
 
 button {
-    width: 100%;
+  width: 100%;
+}
+
+.container-apply-result {
+  padding-top: 150rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-apply-result {
+  margin-top: 40rpx;
 }

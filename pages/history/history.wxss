@@ -1,23 +1,58 @@
 .container {
-    padding: 40rpx;
+  padding: 40rpx;
+  background-color: #EEE;
 }
 
 .item {
-    border: 1rpx solid #2E96CC;
-    padding: 10rpx;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20rpx;
+  background-color: #FFF;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  width: 670rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20rpx;
+}
+
+.item-line {
+  width: 670rpx;
+  display: flex;
+  flex-direction: row;
 }
 
 .item-text {
-    height: 60prx;
-    line-height: 60rpx;
+  width: 150rpx;
+  height: 60prx;
+  line-height: 60rpx;
+  font-size: 18px;
+  text-align: right;
+  color: #888;
+}
+
+.item-content {
+  width: 520rpx;
+  height: 60prx;
+  line-height: 60rpx;
+  font-size: 18px;
 }
 
 .item-desc {
-    line-height: 60rpx;
+  width: 520rpx;
+  line-height: 60rpx;
+  font-size: 18px;
 }
 
+.item-state-granted {
+  color: #09BB07;
+}
 
+.item-state-wait {
+  color: #5CACEE;
+}
+
+.item-state-pending {
+  color: #FF8C00;
+}
+
+.item-state-denied {
+  color: #E64340;
+}

@@ -1,11 +1,29 @@
 <!--logs.wxml-->
 <view class="container">
-    <view class="item" wx:for="{{histories}}">
-        <text class="item-text">申请人：{{item.applicant}}</text>
-        <text class="item-text">时间：{{item.time}}</text>
-        <text class="item-text">项目：{{item.name}}</text>
-        <text class="item-desc">描述：{{item.desc}}</text>    
-        <text class="item-text">状态：{{item.state}}</text>    
+  <view class="item" wx:for="{{histories}}">
+    <view class="item-line">
+      <text class="item-text">申请人：</text>
+      <text class="item-content">{{item.applicant}}</text>
     </view>
+    <view class="item-line">
+      <text class="item-text">时间：</text>
+      <text class="item-content">{{item.time}}</text>
+    </view>
+    <view class="item-line">
+      <text class="item-text">项目：</text>
+      <text class="item-content">{{item.name}}</text>
+    </view>
+    <view class="item-line">
+      <text class="item-text">描述：</text>
+      <text class="item-desc">{{item.desc}}</text>
+    </view>
+    <view class="item-line">
+      <text class="item-text">状态：</text>
+      <text class="item-content item-state-granted" wx:if="{{item.state==2}}">已审核</text>      
+      <text class="item-content item-state-wait" wx:if="{{item.state==1}}">待审核</text>
+      <text class="item-content item-state-pending" wx:if="{{item.state==0}}">审核中</text>
+      <text class="item-content item-state-denied" wx:if="{{item.state==-1}}">审核失败</text>
+    </view>
+  </view>
 
 </view>

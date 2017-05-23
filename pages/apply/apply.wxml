@@ -1,5 +1,4 @@
 <!--apply.wxml-->
-
 <form class="container" bindsubmit="onSubmit">
   <view class="line">
     <text class="line-text">医院名</text>
@@ -26,11 +25,10 @@
     <input class="line-input" type="text" name="name"/>
   </view>
 
-  <view class="line-desc">
+  <view class="line">
     <text class="line-text">描述</text>
-    <textarea class="desc-textarea" name="desc"/>
+    <textarea class="line-textarea" name="desc"/>
   </view>
 
   <button form-type="submit" type="primary">提交</button>
-
 </form>

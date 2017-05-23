@@ -8,22 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        telePhoneHint: '固话区号请用"-"隔开'
-    },
-
-    onLoad: function () {
-        // 获取用户信息
-        wx.getUserInfo({
-            withCredentials: true,
-            success: function (res) {
-                var encryptedData = res.encryptedData;
-                var userInfo = res.userInfo;
-                var iv = res.iv;
-                console.log(userInfo);
-                console.log('encryptedData：' + encryptedData);
-                console.log('iv：' + iv);
-            }
-        });
+        telePhoneHint: '请填写11位手机号码或者固定电话'
     },
 
     onSubmit: function (e) {
@@ -64,25 +49,27 @@ Page({
                 console.log("提交成功");
                 // 隐藏加载框
                 wx.hideLoading();
-                wx.showToast({
-                    title: '提交成功',
-                    icon: 'success',
-                    duration: 3000
-                });
+                
                 // 保存最近一次提交信息
                 apply.saveHistory(postData);
+
+                // 跳转到成功页面
+                wx.redirectTo({
+                    url: '../apply_success/apply_success',
+                })
             },
             fail: function () {
                 console.log("提交失败");
                 // 隐藏加载框
                 wx.hideLoading();
-                wx.showToast({
-                    title: '提交失败',
-                    image: '../../images/failure.png',
-                    duration: 3000
-                });
+                
                 // 保存最近一次提交信息
                 apply.saveHistory(postData);
+
+                // 跳转到失败页面
+                wx.navigateTo({
+                    url: '../apply_failure/apply_failure',
+                })
             }
         })
         wx.showLoading({

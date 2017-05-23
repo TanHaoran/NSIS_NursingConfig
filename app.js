@@ -11,7 +11,7 @@ App({
             // 登陆成功后，会在res中获得一个code
             success: function (res) {
                 console.log('登陆成功获取的code的值是：' + res.code);
-                if (res.code) {
+                if (res.code) {                    
                     //发起网络请求，换取openid和session_key
                     wx.request({
                         url: commonValue.service.jscodeToSession,
@@ -32,7 +32,7 @@ App({
                         fail: function () {
                             console.log('换取openid和session_key失败！');
                         }
-                    });
+                    });                    
                 } else {
                     console.log('获取用户登录态失败！' + res.errMsg);
                 }

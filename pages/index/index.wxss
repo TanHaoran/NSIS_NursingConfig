@@ -1,12 +1,30 @@
 /**index.wxss**/
+
 .container {
-    padding: 20rpx;
+  padding: 40rpx;
+}
+
+.userinfo-avatar {
+  margin-top: 100rpx;
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 50%;
+}
+
+.welcome-line {
+  margin-top: 50rpx;
+  font-size: 18px;
+}
+
+.userinfo-nickname {
+  color: #FF8C00;
 }
 
 .apply-info {
-    margin-top: 350rpx;
+  margin-top: 150rpx;
+  font-size: 18px;
 }
 
 .apply-btn {
-    margin-top: 100rpx
+  margin-top: 100rpx;
 }

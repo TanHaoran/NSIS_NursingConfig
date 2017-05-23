@@ -1,5 +1,12 @@
 <!--index.wxml-->
 <view class="container">
+
+
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover" />
+  <view class="welcome-line">
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <text>，欢迎你</text>
+  </view>
   <text class="apply-info">{{indexInfo}}</text>
   <button type="primary" class="apply-btn" bindtap="onApply">{{apply}}</button>
 </view>

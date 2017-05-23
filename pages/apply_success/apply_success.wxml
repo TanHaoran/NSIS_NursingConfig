@@ -1,0 +1,6 @@
+<!--apply_success.wxml-->
+
+<view class="container-apply-result">
+  <icon size="100" type="success" />
+  <text class="text-apply-result">{{successText}}</text>
+</view>

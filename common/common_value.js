@@ -6,7 +6,8 @@ var service = {
 var appInfo = {
     appId: 'wx32b908ea5667c67f',
     appSecret: 'fdab74d9cbfe51de843b5d3f8e9e1332',
-    grantType: 'authorization_code'
+    grantType: 'authorization_code',
+    accessToken: 'nbQPrwfBQkTea9tY7R4mhXLtKedDXhrZxMBNWUPWCaQgreYO1ohii2ACd2Eky86fDy2wJTgjSFqSSQ2L1eu_-AAmdCewJpaF86EcnFW6W3YPnIF3hAb3NGuLYsG7e2PJDPVbAJAVHN'
 }
 
 var userInfo = {

@@ -1,34 +1,36 @@
 {
-	"pages": [
-		"pages/index/index",
-		"pages/history/history",
-        "pages/apply/apply"
-	],
-	"window": {
-		"backgroundTextStyle": "light",
-		"navigationBarBackgroundColor": "#dfdfdf",
-		"navigationBarTitleText": "NSIS护理项配置",
-		"navigationBarTextStyle": "black",
-		"enablePullDownRefresh": false
-	},
-	"tabBar": {
-		"color": "#000000",
-		"selectedColor": "#2E96CC",
-		"backgroundColor": "#dfdfdf",
-		"borderStyle": "black",
-		"list": [
-			{
-				"pagePath": "pages/index/index",
-				"text": "申请",
-				"iconPath": "images/home.png",
-				"selectedIconPath": "images/home_selected.png"
-			},
-			{
-				"pagePath": "pages/history/history",
-				"text": "记录",
-				"iconPath": "images/history.png",
-				"selectedIconPath": "images/history_selected.png"
-			}
-		]
-	}
+    "pages": [
+        "pages/index/index",
+        "pages/history/history",
+        "pages/apply/apply",
+        "pages/apply_success/apply_success",
+        "pages/apply_failure/apply_failure"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#dfdfdf",
+        "navigationBarTitleText": "NSIS护理项配置",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": false
+    },
+    "tabBar": {
+        "color": "#000000",
+        "selectedColor": "#2E96CC",
+        "backgroundColor": "#dfdfdf",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "申请",
+                "iconPath": "images/home.png",
+                "selectedIconPath": "images/home_selected.png"
+            },
+            {
+                "pagePath": "pages/history/history",
+                "text": "记录",
+                "iconPath": "images/history.png",
+                "selectedIconPath": "images/history_selected.png"
+            }
+        ]
+    }
 }
