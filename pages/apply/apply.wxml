@@ -18,7 +18,7 @@
 
   <view class="line">
     <text class="line-text">联系电话</text>
-    <input class="line-input" type="number" name="telephone"/>
+    <input class="line-input" type="number" name="telephone" placeholder="{{telePhoneHint}}"/>
   </view>
 
   <view class="line">
