@@ -1,33 +1,49 @@
 <!--apply.wxml-->
 <form class="container" bindsubmit="onSubmit">
+  <view class="pop-error" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
   <view class="line">
+    <view>
     <text class="line-text">医院名</text>
-    <input class="line-input" type="text" name="hospital"/>
+    <text class="line-not-null">*</text>
+    </view>
+    <input class="line-input" type="text" name="hospital" />
   </view>
 
   <view class="line">
+    <view>
     <text class="line-text">科室</text>
-    <input class="line-input" type="text" name="office"/>
+    <text class="line-not-null">*</text>
+    </view>
+    <input class="line-input" type="text" name="office" />
   </view>
 
   <view class="line">
+    <view>
     <text class="line-text">申请人</text>
-    <input class="line-input" type="text" name="applicant"/>
+    <text class="line-not-null">*</text>
+    </view>
+    <input class="line-input" type="text" name="applicant" value="{{applicant}}"/>
   </view>
 
   <view class="line">
+    <view>
     <text class="line-text">联系电话</text>
-    <input class="line-input" type="number" name="telephone" placeholder="{{telePhoneHint}}"/>
+    <text class="line-not-null">*</text>
+    </view>
+    <input class="line-input" type="number" name="telephone" placeholder="{{telePhoneHint}}" placeholder-class="line-telephone-hint"/>
   </view>
 
   <view class="line">
+    <view>
     <text class="line-text">申请项目</text>
-    <input class="line-input" type="text" name="name"/>
+    <text class="line-not-null">*</text>
+    </view>
+    <input class="line-input" type="text" name="name"  value="{{name}}"/>
   </view>
 
   <view class="line">
     <text class="line-text">描述</text>
-    <textarea class="line-textarea" name="desc"/>
+    <textarea class="line-textarea" name="desc"  value="{{desc}}"/>
   </view>
 
   <button form-type="submit" type="primary">提交</button>

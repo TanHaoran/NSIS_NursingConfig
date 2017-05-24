@@ -1,9 +1,10 @@
 <!--logs.wxml-->
 <view class="container">
-  <view class="item" wx:for="{{histories}}">
+  <view class="item" wx:for="{{applications}}">
     <view class="item-line">
       <text class="item-text">申请人：</text>
       <text class="item-content">{{item.applicant}}</text>
+
     </view>
     <view class="item-line">
       <text class="item-text">时间：</text>
@@ -19,10 +20,40 @@
     </view>
     <view class="item-line">
       <text class="item-text">状态：</text>
-      <text class="item-content item-state-granted" wx:if="{{item.state==2}}">已审核</text>      
-      <text class="item-content item-state-wait" wx:if="{{item.state==1}}">待审核</text>
-      <text class="item-content item-state-pending" wx:if="{{item.state==0}}">审核中</text>
-      <text class="item-content item-state-denied" wx:if="{{item.state==-1}}">审核失败</text>
+      <text class="item-content item-state-granted item-state" wx:if="{{item.state==2}}">已审核</text>
+      <text class="item-content item-state-wait item-state" wx:if="{{item.state==1}}">待审核</text>
+      <text class="item-content item-state-pending item-state" wx:if="{{item.state==0}}">审核中</text>
+      <text class="item-content item-state-denied item-state" wx:if="{{item.state==-1}}">审核失败</text>
+      <image class="qr-code" src="{{qrCodeSrc}}" wx:if="{{item.state==2}}" bindtap="onQrCode" data-status="open" />
+
+    </view>
+    <view class="button-group" wx:if="{{item.state==1}}">
+      <button class="btn-edit" bindtap="onEdit" data-index="{{index}}">编辑</button>
+      <button class="btn-delete" bindtap="onDelete">撤销</button>
+    </view>
+
+    <!--mask-->
+    <view class="drawer_screen" wx:if="{{showModalStatus}}"></view>
+    <!--content-->
+    <!--使用animation属性指定需要执行的动画-->
+    <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+      <!--drawer content-->
+      <view class="drawer_title">{{item.name}}</view>
+
+
+
+      <swiper class="drawer_content" indicator-dots="true">
+        <block wx:for="{{qrCodeUrls}}" wx:for-item="url">
+          <swiper-item>
+            <image class="qr-code-big" mode="aspectFit" src="{{url}} " />
+          </swiper-item>
+        </block>
+      </swiper>
+
+
+
+      <view class="btn_ok" bindtap="onQrCode" data-status="close">确定</view>
     </view>
   </view>
 

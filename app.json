@@ -8,15 +8,15 @@
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#dfdfdf",
+        "navigationBarBackgroundColor": "#EEE",
         "navigationBarTitleText": "NSIS护理项配置",
         "navigationBarTextStyle": "black",
         "enablePullDownRefresh": false
     },
     "tabBar": {
         "color": "#000000",
-        "selectedColor": "#2E96CC",
-        "backgroundColor": "#dfdfdf",
+        "selectedColor": "#09BB07",
+        "backgroundColor": "#EEE",
         "borderStyle": "black",
         "list": [
             {

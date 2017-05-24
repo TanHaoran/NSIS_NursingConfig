@@ -40,6 +40,7 @@ App({
         });
     },
 
+
     // 保存用户的信息
     saveUserInfo: function(openId, sessionKey) {
         wx.setStorage({

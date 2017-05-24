@@ -8,28 +8,88 @@ Page({
      * 页面的初始数据
      */
     data: {
-        telePhoneHint: '请填写11位手机号码或者固定电话'
+        popErrorMsg: '',
+        telePhoneHint: '请填写11位手机号码或者固定电话',
+        applicant: '',
+        name: '',
+        desc: ''
     },
 
+    onLoad: function (option) {
+        console.log('接收到的参数');
+        var applicant = option.applicant;
+        var name = option.name;
+        var desc = option.desc;
+        this.setData({
+            applicant: applicant,
+            name: name,
+            desc: desc
+        });
+    },
+
+    // 提交按钮
     onSubmit: function (e) {
 
-        var apply = this;
         var postData = e.detail.value;
         // 获取用户的openId
         var openId = this.loadUserInfo(e);
         postData.openId = '123';
 
-        // 验证手机号码
-        var isPhoneLegal = util.checkPhone(postData.telephone);
-        if (!isPhoneLegal) {
-            wx.showToast({
-                title: '联系电话输入有误',
-                image: '../../images/failure.png',
-                duration: 3000
-            });
+        // 检测信息是否完整
+        this.checkInfoCompleted(postData);
+        if (this.data.popErrorMsg) {
             return;
         }
 
+        this.postDataToServer(postData);
+    },
+
+    // 检测信息是否完整
+    checkInfoCompleted: function (postData) {
+        var errorMsg;
+        if (!postData.hospital) {
+            errorMsg = '医院名不能为空';
+        } else if (!postData.office) {
+            errorMsg = '科室不能为空';
+        } else if (!postData.applicant) {
+            errorMsg = '申请人不能为空';
+        } else if (!postData.telephone) {
+            errorMsg = '联系电话不能为空';
+        } else if (postData.telephone && !util.checkPhone(postData.telephone)) {
+            errorMsg = '联系电话输入有误';
+        } else if (!postData.name) {
+            errorMsg = '申请项目不能为空';
+        }
+
+        if (errorMsg) {
+            this.setData(
+                { popErrorMsg: errorMsg }
+            );
+        }
+
+        // 3秒过后提示框消失
+        this.errorMsgFadeOut();
+    },
+
+
+    // 3秒过后提示框消失
+    errorMsgFadeOut() {
+        var fadeOutTimeOut = setTimeout(() => {
+            this.setData(
+                { popErrorMsg: '' }
+            );
+            clearTimeout(fadeOutTimeOut);
+        }, 3000);
+    },
+
+    // 获取用户openId
+    loadUserInfo: function (e) {
+        return wx.getStorageSync(commonValue.userInfo.openId);
+    },
+
+    // 向服务提交数据
+    postDataToServer: function (postData) {
+        var apply = this;
         console.log('提交的数据为：');
         console.log('openId：' + postData.openId);
         console.log('医院名：' + postData.hospital);
@@ -49,7 +109,7 @@ Page({
                 console.log("提交成功");
                 // 隐藏加载框
                 wx.hideLoading();
-                
+
                 // 保存最近一次提交信息
                 apply.saveHistory(postData);
 
@@ -62,7 +122,7 @@ Page({
                 console.log("提交失败");
                 // 隐藏加载框
                 wx.hideLoading();
-                
+
                 // 保存最近一次提交信息
                 apply.saveHistory(postData);
 
@@ -71,16 +131,11 @@ Page({
                     url: '../apply_failure/apply_failure',
                 })
             }
-        })
+        });
         wx.showLoading({
             title: '正在提交',
             mask: 'false',
-        })
-    }, 
-
-    // 获取用户openId
-    loadUserInfo: function(e) {
-        return wx.getStorageSync(commonValue.userInfo.openId);
+        });
     },
 
     // 保存最近一次提交信息
