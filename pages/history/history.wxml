@@ -1,59 +1,62 @@
 <!--logs.wxml-->
 <view class="container">
   <view class="item" wx:for="{{applications}}">
+
     <view class="item-line">
       <text class="item-text">申请人：</text>
       <text class="item-content">{{item.applicant}}</text>
-
     </view>
+
     <view class="item-line">
       <text class="item-text">时间：</text>
       <text class="item-content">{{item.time}}</text>
     </view>
+
     <view class="item-line">
       <text class="item-text">项目：</text>
       <text class="item-content">{{item.name}}</text>
     </view>
+
     <view class="item-line">
       <text class="item-text">描述：</text>
       <text class="item-desc">{{item.desc}}</text>
     </view>
+
     <view class="item-line">
       <text class="item-text">状态：</text>
       <text class="item-content item-state-granted item-state" wx:if="{{item.state==2}}">已审核</text>
       <text class="item-content item-state-wait item-state" wx:if="{{item.state==1}}">待审核</text>
       <text class="item-content item-state-pending item-state" wx:if="{{item.state==0}}">审核中</text>
       <text class="item-content item-state-denied item-state" wx:if="{{item.state==-1}}">审核失败</text>
+      <!--审核通过之后会出现二维码的图标-->
       <image class="qr-code" src="{{qrCodeSrc}}" wx:if="{{item.state==2}}" bindtap="onQrCode" data-status="open" />
-
     </view>
+
+    <!--如果是待审核状态，会出现2个按钮-->
     <view class="button-group" wx:if="{{item.state==1}}">
       <button class="btn-edit" bindtap="onEdit" data-index="{{index}}">编辑</button>
       <button class="btn-delete" bindtap="onDelete">撤销</button>
     </view>
 
-    <!--mask-->
-    <view class="drawer_screen" wx:if="{{showModalStatus}}"></view>
+    <!--弹出二维码窗口-->
+    <view class="big-qr-code-screen" wx:if="{{showBigQrCode}}"></view>
     <!--content-->
     <!--使用animation属性指定需要执行的动画-->
-    <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+    <view animation="{{bigQrCodeAnimation}}" class="big-qr-code-box" wx:if="{{showBigQrCode}}">
 
-      <!--drawer content-->
-      <view class="drawer_title">{{item.name}}</view>
+      <!--二维码标题-->
+      <view class="big-qr-code-title">{{item.name}}</view>
 
-
-
-      <swiper class="drawer_content" indicator-dots="true">
+      <!--二维码滚动区域-->
+      <swiper class="big-qr-code-content" indicator-dots="true">
         <block wx:for="{{qrCodeUrls}}" wx:for-item="url">
           <swiper-item>
-            <image class="qr-code-big" mode="aspectFit" src="{{url}} " />
+            <image class="big-qr-code" mode="aspectFit" src="{{url}}" />
           </swiper-item>
         </block>
       </swiper>
 
-
-
-      <view class="btn_ok" bindtap="onQrCode" data-status="close">确定</view>
+      <view class="big-qr-code-ok" bindtap="onQrCode" data-status="close">确定</view>
     </view>
   </view>
 

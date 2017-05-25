@@ -1,4 +1,5 @@
 .container {
+    width: 750rpx;
   padding: 40rpx;
   background-color: #eee;
 }
@@ -83,21 +84,8 @@
   color: #e64340;
 }
 
-/*button*/
-
-.btn {
-  width: 80%;
-  padding: 20rpx 0;
-  border-radius: 10rpx;
-  text-align: center;
-  margin: 40rpx 10%;
-  background: #000;
-  color: #fff;
-}
-
-/*mask*/
-
-.drawer_screen {
+/*大二维码显示框*/
+.big-qr-code-screen {
   border: 1rpx solid #3cc51f;
   width: 100%;
   height: 100%;
@@ -112,7 +100,7 @@
 
 /*content*/
 
-.drawer_box {
+.big-qr-code-box {
   width: 650rpx;
   overflow: hidden;
   position: fixed;
@@ -125,27 +113,27 @@
   text-align: center;
 }
 
-.drawer_title {
+.big-qr-code-title {
   padding: 20rpx;
   height: 44rpx;
   text-align: center;
 }
 
-.drawer_content {
+.big-qr-code-content {
   margin-top: 20rpx;
   width: 630rpx;
   padding: 10rpx;
   height: 600rpx;
 }
 
-.qr-code-big {
+.big-qr-code {
   height: 550rpx;
   text-align: center;
   align-content: center;
   line-height: 550rpx;
 }
 
-.btn_ok {
+.big-qr-code-ok {
   height: 44rpx;
   padding: 20rpx;
   text-align: center;

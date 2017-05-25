@@ -68,12 +68,6 @@ Page({
         }
 
         // 3秒过后提示框消失
-        this.errorMsgFadeOut();
-    },
-
-
-    // 3秒过后提示框消失
-    errorMsgFadeOut() {
         var fadeOutTimeOut = setTimeout(() => {
             this.setData(
                 { popErrorMsg: '' }
@@ -81,6 +75,7 @@ Page({
             clearTimeout(fadeOutTimeOut);
         }, 3000);
     },
+
 
     // 获取用户openId
     loadUserInfo: function (e) {
