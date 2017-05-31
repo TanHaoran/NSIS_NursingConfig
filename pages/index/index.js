@@ -6,7 +6,12 @@ Page({
         apply: '申请',
         userInfo: {}
     },    
-    onLoad: function() {
+    onLoad: function(option) {
+        console.log("医院：" + option.hospital);
+        console.log("科室：" + option.office);
+        wx.showToast({
+            title: option.hospital + option.office,
+        })
         var index = this;
         // 获取用户信息
         wx.getUserInfo({
@@ -14,6 +19,7 @@ Page({
             success: function (res) {
                 var encryptedData = res.encryptedData;
                 var userInfo = res.userInfo;
+                
                 var iv = res.iv;
                 console.log(userInfo);
                 console.log('encryptedData：' + encryptedData);

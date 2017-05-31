@@ -1,6 +1,6 @@
 .container {
-    width: 750rpx;
-  padding: 40rpx;
+  width: 750rpx;
+  padding: 30rpx;
   background-color: #eee;
 }
 
@@ -34,6 +34,7 @@
   height: 60prx;
   line-height: 60rpx;
   font-size: 18px;
+  text-align: left;
 }
 
 .qr-code {
@@ -46,6 +47,7 @@
   width: 520rpx;
   line-height: 60rpx;
   font-size: 18px;
+  text-align: left;
 }
 
 .item-state-granted {
@@ -85,6 +87,7 @@
 }
 
 /*大二维码显示框*/
+
 .big-qr-code-screen {
   border: 1rpx solid #3cc51f;
   width: 100%;
@@ -139,4 +142,34 @@
   text-align: center;
   border-top: 1px solid #dfdfdf;
   color: #3cc51f;
+}
+
+.swiper-tab {
+  width: 750rpx;
+  border-bottom: 2rpx solid #777;
+  text-align: center;
+  line-height: 80rpx;
+}
+
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 187.5rpx;
+  color: #777;
+}
+
+.on {
+  color: #09bb07;
+  border-bottom: 5rpx solid #09bb07;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-box view {
+  text-align: center;
 }

@@ -1,5 +1,4 @@
 /**index.wxss**/
-
 .container {
   padding: 40rpx;
 }
@@ -28,3 +27,4 @@
 .apply-btn {
   margin-top: 100rpx;
 }
+

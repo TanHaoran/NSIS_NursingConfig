@@ -12,18 +12,27 @@ Page({
         telePhoneHint: '请填写11位手机号码或者固定电话',
         applicant: '',
         name: '',
-        desc: ''
+        desc: '',
+        applicationId: ''
     },
 
+    // 页面加载
     onLoad: function (option) {
         console.log('接收到的参数');
+        this.data.applicationId = option.applicationid;
         var applicant = option.applicant;
         var name = option.name;
         var desc = option.desc;
+        var hospital = option.hospital;
+        var office = option.office;
+        var telephone = option.telephone;
         this.setData({
             applicant: applicant,
             name: name,
-            desc: desc
+            desc: desc,
+            hospital: hospital,
+            office: office,
+            telephone: telephone
         });
     },
 
@@ -32,15 +41,20 @@ Page({
 
         var postData = e.detail.value;
         // 获取用户的openId
-        var openId = this.loadUserInfo(e);
-        postData.openId = '123';
+        var openId = this.getUserOpenId(e);
+        postData.openId = openId;
+
+        // 取得applicationId
+        postData.applicationId = this.data.applicationId;
 
         // 检测信息是否完整
         this.checkInfoCompleted(postData);
+
         if (this.data.popErrorMsg) {
             return;
         }
 
+        // 将数据提交到服务器
         this.postDataToServer(postData);
     },
 
@@ -59,6 +73,8 @@ Page({
             errorMsg = '联系电话输入有误';
         } else if (!postData.name) {
             errorMsg = '申请项目不能为空';
+        } else if (!postData.desc) {
+            errorMsg = '描述不能为空';
         }
 
         if (errorMsg) {
@@ -78,48 +94,76 @@ Page({
 
 
     // 获取用户openId
-    loadUserInfo: function (e) {
+    getUserOpenId: function (e) {
         return wx.getStorageSync(commonValue.userInfo.openId);
     },
 
     // 向服务提交数据
     postDataToServer: function (postData) {
         var apply = this;
+
+        // 如果applicationId不为空，表示在编辑状态
+        if (postData.applicationId) {
+            var url = commonValue.service.ip + commonValue.method.updateApplication;
+        } else {
+            var url = commonValue.service.ip + commonValue.method.insertApplication;
+        }
+
+
+        console.log('插入数据服务地址：' + url);
         console.log('提交的数据为：');
         console.log('openId：' + postData.openId);
+        console.log('applicationId：' + postData.applicationId);
         console.log('医院名：' + postData.hospital);
         console.log('科室：' + postData.office);
         console.log('申请人：' + postData.applicant);
         console.log('联系电话：' + postData.telephone);
         console.log('申请项目：' + postData.name);
         console.log('描述：' + postData.desc);
+
         wx.request({
-            url: commonValue.service.nursingConfig,
-            data: postData,
+            url: url,
+            data: {
+                ApplicationID: postData.applicationId,
+                WeixinID: postData.openId,
+                HospitalName: postData.hospital,
+                OfficeName: postData.office,
+                Applicant: postData.applicant,
+                Telphone: postData.telephone,
+                ProJectName: postData.name,
+                Describe: postData.desc,
+                App_Date: '',
+                State: 0,
+                Prompt: ''
+            },
             method: 'POST',
             header: {
                 'content-type': 'application/json'
             },
-            success: function () {
-                console.log("提交成功");
+            success: function (res) {
                 // 隐藏加载框
                 wx.hideLoading();
 
-                // 保存最近一次提交信息
-                apply.saveHistory(postData);
+                console.log('返回值是：' + res.data);
 
-                // 跳转到成功页面
-                wx.redirectTo({
-                    url: '../apply_success/apply_success',
-                })
+                if (res.data == '1') {
+                    // 跳转到成功页面
+                    console.log("提交成功");
+                    wx.redirectTo({
+                        url: '../apply_success/apply_success',
+                    });
+                } else {
+                    // 跳转到失败页面
+                    console.log("提交失败");
+                    wx.navigateTo({
+                        url: '../apply_failure/apply_failure',
+                    });
+                }
             },
             fail: function () {
                 console.log("提交失败");
                 // 隐藏加载框
                 wx.hideLoading();
-
-                // 保存最近一次提交信息
-                apply.saveHistory(postData);
 
                 // 跳转到失败页面
                 wx.navigateTo({
@@ -129,18 +173,7 @@ Page({
         });
         wx.showLoading({
             title: '正在提交',
-            mask: 'false',
+            mask: true,
         });
-    },
-
-    // 保存最近一次提交信息
-    saveHistory: function (postData) {
-        wx.setStorageSync(commonValue.history.hospital, postData.hospital);
-        wx.setStorageSync(commonValue.history.office, postData.office);
-        wx.setStorageSync(commonValue.history.applicant, postData.applicant);
-        wx.setStorageSync(commonValue.history.telephone, postData.telephone);
-        wx.setStorageSync(commonValue.history.name, postData.name);
-        wx.setStorageSync(commonValue.history.desc, postData.desc);
-        console.log('存储本地记录成功！');
     }
 })

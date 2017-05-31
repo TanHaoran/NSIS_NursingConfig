@@ -1,42 +1,123 @@
 //logs.js
+
+var commonValue = require('../../common/common_value.js');
+
 Page({
     data: {
         qrCodeSrc: '../../images/qr_code.png',
         qrCodeUrls: [
-            '../../images/qr_code_1.jpg',
-            '../../images/qr_code_2.jpg'
+            'http://qrcode.shuogesha.com/qrcode?pixel=420_420&content=一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
+            'http://qrcode.shuogesha.com/qrcode?pixel=420_420&content=一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十'
         ],
-        applications: [
-            {
-                applicant: "张紧轮",
-                time: "2017-5-22 11:04:26",
-                name: "脱落",
-                desc: "关于脱落的详细描述，如果这部分很长很长怎么办呢，看看如果换行了会不会有影响呢。",
-                state: 2
-            },
-            {
-                applicant: "李易峰",
-                time: "2017-5-24 11:04:26",
-                name: "压疮",
-                desc: "关于李易峰的详细描述",
-                state: 1
-            },
-            {
-                applicant: "林俊杰",
-                time: "2017-5-24 11:04:26",
-                name: "压疮",
-                desc: "关于林俊杰的详细描述",
-                state: 0
-            },
-            {
-                applicant: "鹿晗",
-                time: "2017-5-24 11:04:26",
-                name: "压疮",
-                desc: "关于鹿晗的详细描述",
-                state: -1
+        applications: [],
+        showBigQrCode: false,
+
+
+
+        // 页面配置  
+        navigations: [
+            0, 1, 2, 3
+        ],
+        // 用来设置列表显示区域的高度
+        winHeight: 0,
+        // tab切换 
+        currentTab: 0
+    },
+
+    // 页面加载函数
+    onLoad: function () {
+        // 读取所有申请
+        this.getApplications();
+
+        var history = this;
+        // 获取系统信息 
+        wx.getSystemInfo({
+            success: function (res) {
+                history.setData({
+                    winHeight: res.windowHeight
+                });
             }
-        ],
-        showBigQrCode: false
+        });
+    },
+
+    // 滑动切换tab 
+    bindChange: function (e) {
+        var history = this;
+        history.setData({ currentTab: e.detail.current });
+    },
+    // 点击tab切换 
+    swichNavigation: function (e) {
+        if (this.data.currentTab === e.target.dataset.current) {
+            return false;
+        } else {
+            this.setData({
+                currentTab: e.target.dataset.current
+            })
+        }
+    },
+
+    // 读取所有申请
+    getApplications: function () {
+
+        var history = this;
+
+        wx.showLoading({
+            title: '玩命加载中...',
+            mask: true
+        });
+
+        var url = commonValue.service.ip + commonValue.method.getApplication;
+        var openId = history.getUserOpenId();
+        console.log('请求地址：' + url);
+        console.log('请求openId：' + openId);
+
+        wx.request({
+            url: url,
+            header: {
+                'content-type': 'application/json'
+            },
+            data: {
+                WeixinID: openId
+            },
+            success: function (res) {
+                console.log('读取成功！');
+                console.log(res.data);
+                history.setApplications(res.data);
+            },
+            fail: function () {
+                console.log('读取失败！');
+            }, 
+            complete: function () {
+                wx.hideLoading();
+            }
+        });
+    },
+
+    // 获取用户openId
+    getUserOpenId: function () {
+        return wx.getStorageSync(commonValue.userInfo.openId);
+    },
+
+    /***
+     * 设置列表数据
+     * State审核状态：
+     * 审核状态：0.待审核（可编辑，可删除），1.审核中，2.审核通过，3.审核失败
+     */
+    setApplications: function (data) {
+        if (data) {
+            this.data.applications.splice(0, this.data.applications.length);
+            for (var i = data.length - 1; i >= 0; i--) {
+                var date = data[i].App_Date;
+                date = date.replace('T', ' ');
+                var length = date.length;
+                date = date.substring(0, length - 4);
+                data[i].App_Date = date;
+                this.data.applications.push(data[i]);
+            }
+            this.setData({
+                applications: this.data.applications
+            });
+        }
     },
 
     // 用户点击编辑按钮
@@ -44,14 +125,17 @@ Page({
         var index = e.currentTarget.dataset.index;
         var application = this.data.applications[index];
         console.log(application);
-        var url = '../apply/apply?applicant=' + application.applicant + '&name=' + application.name + '&desc=' + application.desc;
+        var url = '../apply/apply?applicant=' + application.Applicant + '&name=' + application.ProJectName + '&desc=' + application.Describe + '&applicationid=' + application.ApplicationID + '&hospital=' + application.HospitalName + '&office=' + application.OfficeName + '&telephone=' + application.Telphone;
         wx.navigateTo({
             url: url,
         })
     },
 
     // 用户点击删除按钮
-    onDelete: function () {
+    onDelete: function (e) {
+        var history = this;
+        var index = e.currentTarget.dataset.index;
+        var application = this.data.applications[index];
         wx.showModal({
             title: '提示',
             content: '确定要撤销这条记录吗？',
@@ -61,6 +145,26 @@ Page({
             success: function (res) {
                 if (res.confirm) {
                     console.log('用户点击确定');
+                    var url = commonValue.service.ip + commonValue.method.deleteApplication;
+                    wx.request({
+                        url: url,
+                        data: {
+                            ApplicationID: application.ApplicationID,
+                        },
+                        method: 'POST',
+                        success: function (r) {
+                            history.getApplications();
+                            console.log(r.data);
+                            if (r.data == '1') {
+                                wx.showToast({
+                                    title: '撤销成功',
+                                });
+                            }
+                        },
+                        fail: function () {
+                            console.log('删除失败');
+                        }
+                    })
                 } else if (res.cancel) {
                     console.log('用户点击取消');
                 }
@@ -102,34 +206,22 @@ Page({
 
             //关闭 
             if (currentStatus == 'close') {
-                this.setData(
-                    {
-                        showBigQrCode: false
-                    }
-                );
+                this.setData({
+                    showBigQrCode: false
+                });
             }
         }.bind(this), 300)
 
         // 显示 
         if (currentStatus == 'open') {
-            this.setData(
-                {
-                    showBigQrCode: true
-                }
-            );
+            this.setData({
+                showBigQrCode: true
+            });
         }
-    }, 
+    },
 
     // 下拉刷新的事件
-    onPullDownRefresh: function() {
-        wx.showLoading({
-            title: '玩命加载中...',
-        });
-
-        // 3秒后停止刷新
-        setTimeout(() => {
-            wx.hideLoading();
-            wx.stopPullDownRefresh();
-        }, 3000);       
+    onPullDownRefresh: function () {
+        this.getApplications();
     }
 })

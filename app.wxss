@@ -16,8 +16,8 @@ button {
 
 .container-apply-result {
   padding-top: 150rpx;
-  padding-left: 40rpx;
-  padding-right: 40rpx;
+  padding-left: 60rpx;
+  padding-right: 60rpx;
   align-items: center;
   display: flex;
   flex-direction: column;
