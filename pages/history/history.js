@@ -5,14 +5,9 @@ var commonValue = require('../../common/common_value.js');
 Page({
     data: {
         qrCodeSrc: '../../images/qr_code.png',
-        qrCodeUrls: [
-            'http://qrcode.shuogesha.com/qrcode?pixel=420_420&content=一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十',
-            'http://qrcode.shuogesha.com/qrcode?pixel=420_420&content=一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十'
-        ],
+        qrCodeUrls: [],
         applications: [],
         showBigQrCode: false,
-
-
 
         // 页面配置  
         navigations: [
@@ -21,7 +16,8 @@ Page({
         // 用来设置列表显示区域的高度
         winHeight: 0,
         // tab切换 
-        currentTab: 0
+        currentTab: 0,
+        qrCodeTitle: ''
     },
 
     // 页面加载函数
@@ -86,7 +82,7 @@ Page({
             },
             fail: function () {
                 console.log('读取失败！');
-            }, 
+            },
             complete: function () {
                 wx.hideLoading();
             }
@@ -105,6 +101,7 @@ Page({
      */
     setApplications: function (data) {
         if (data) {
+            // 首先清空数据
             this.data.applications.splice(0, this.data.applications.length);
             for (var i = data.length - 1; i >= 0; i--) {
                 var date = data[i].App_Date;
@@ -174,6 +171,37 @@ Page({
 
     // 点击小二维码
     onQrCode: function (e) {
+        var index = e.currentTarget.dataset.index;
+        var application = this.data.applications[index];
+        var url = commonValue.service.ip + commonValue.method.getQrCode + '?ApplicationID=' + application.ApplicationID;
+
+        this.data.qrCodeTitle = application.ProJectName;
+
+        console.log('url是：' + url);
+        console.log('请求id是：' + application.ApplicationID);
+
+        // 设置二维码的数据
+        this.setQrCodeData(url);
+        // 显示大二维码
+        this.bigQrCode(e);
+    },
+
+
+    /**
+     * 设置二维码的数据
+     */
+    setQrCodeData: function (url) {
+        // 先清空数据
+        this.data.qrCodeUrls.splice(0, this.data.qrCodeUrls.length);
+        this.data.qrCodeUrls.push(url);
+        this.setData({
+            qrCodeTitle: this.data.qrCodeTitle,
+            qrCodeUrls: this.data.qrCodeUrls
+        });
+    },
+
+    // 显示大二维码
+    bigQrCode: function (e) {
         // 获取此时要open或者close的状态
         var currentStatus = e.currentTarget.dataset.status;
         /* 动画部分 */

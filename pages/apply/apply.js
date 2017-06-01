@@ -107,8 +107,7 @@ Page({
             var url = commonValue.service.ip + commonValue.method.updateApplication;
         } else {
             var url = commonValue.service.ip + commonValue.method.insertApplication;
-        }
-
+        }     
 
         console.log('插入数据服务地址：' + url);
         console.log('提交的数据为：');

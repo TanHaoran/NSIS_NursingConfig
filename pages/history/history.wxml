@@ -6,7 +6,7 @@
   <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNavigation">审核失败</view>
 </view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 50}}px" bindchange="bindChange">
-  <block wx:for="{{navigations}}">
+  <block wx:for="{{navigations}}" wx:key="*this">
     <swiper-item>
       <scroll-view scroll-y class="container">
         <block wx:for="{{applications}}">
@@ -34,18 +34,29 @@
 
             <view class="item-line">
               <text class="item-text">状态：</text>
-              <text class="item-content item-state-granted item-state" wx:if="{{item.State==2}}">已审核</text>
+              <text class="item-content item-state-granted item-state" wx:if="{{item.State==2}}">审核通过</text>
               <text class="item-content item-state-wait item-state" wx:if="{{item.State==0}}">待审核</text>
               <text class="item-content item-state-pending item-state" wx:if="{{item.State==1}}">审核中</text>
               <text class="item-content item-state-denied item-state" wx:if="{{item.State==3}}">审核失败</text>
               <!--审核通过之后会出现二维码的图标-->
-              <image class="qr-code" src="{{qrCodeSrc}}" wx:if="{{item.State==2}}" bindtap="onQrCode" data-status="open" />
+              <image class="qr-code" src="{{qrCodeSrc}}" wx:if="{{item.State==2}}" bindtap="onQrCode" data-status="open" data-index="{{index}}" />
+            </view>
+
+            <view class="item-line" wx:if="{{item.State==3}}">
+              <text class="item-text">说明：</text>
+              <text class="item-desc item-fail-info">{{item.Prompt}}</text>
             </view>
 
             <!--如果是待审核状态，会出现2个按钮-->
             <view class="button-group" wx:if="{{item.State==0}}">
               <button class="btn-edit" bindtap="onEdit" data-index="{{index}}">编辑</button>
               <button class="btn-delete" bindtap="onDelete" data-index="{{index}}">撤销</button>
+            </view>
+
+            <!--如果是审核失败状态，会出现2个按钮-->
+            <view class="button-group" wx:if="{{item.State==3}}">
+              <button class="btn-edit" bindtap="onEdit" data-index="{{index}}">编辑</button>
+              <button class="btn-delete" bindtap="onDelete" data-index="{{index}}">删除</button>
             </view>
 
             <!--弹出二维码窗口-->
@@ -55,18 +66,18 @@
             <view animation="{{bigQrCodeAnimation}}" class="big-qr-code-box" wx:if="{{showBigQrCode}}">
 
               <!--二维码标题-->
-              <view class="big-qr-code-title">{{item.name}}</view>
+              <view class="big-qr-code-title">{{qrCodeTitle}}</view>
 
               <!--二维码滚动区域-->
               <swiper class="big-qr-code-content" indicator-dots="true">
-                <block wx:for="{{qrCodeUrls}}" wx:for-item="url">
+                <block wx:for="{{qrCodeUrls}}" wx:for-item="url" wx:key="*this">
                   <swiper-item>
                     <image class="big-qr-code" mode="aspectFit" src="{{url}}" />
                   </swiper-item>
                 </block>
               </swiper>
 
-              <view class="big-qr-code-ok" bindtap="onQrCode" data-status="close">确定</view>
+              <view class="big-qr-code-ok" bindtap="bigQrCode" data-status="close">确定</view>
             </view>
           </view>
         </block>
