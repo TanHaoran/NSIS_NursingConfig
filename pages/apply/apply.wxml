@@ -44,7 +44,7 @@
   <view class="line">
     <text class="line-text">描述</text>
     <text class="line-not-null">*</text>
-    <textarea class="line-textarea" name="desc"  value="{{desc}}"/>
+    <textarea class="line-textarea" name="desc" value="{{desc}}"/>
   </view>
 
   <button form-type="submit" type="primary">提交</button>

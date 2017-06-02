@@ -4,6 +4,15 @@
   background-color: #eee;
 }
 
+.empty-message {
+  padding-top: 20rpx;
+  width: 750rpx;
+  text-align: center;
+  font-size: 15px;
+  color: #888;
+  background-color: #eee;
+}
+
 .item {
   background-color: #fff;
   border-radius: 20rpx;
@@ -21,7 +30,7 @@
 }
 
 .item-text {
-  width: 150rpx;
+  width: 170rpx;
   height: 60prx;
   line-height: 60rpx;
   font-size: 18px;
@@ -30,7 +39,7 @@
 }
 
 .item-content {
-  width: 520rpx;
+  width: 500rpx;
   height: 60prx;
   line-height: 60rpx;
   font-size: 18px;
@@ -71,14 +80,15 @@
 }
 
 .button-group {
-  width: 670rpx;
+  margin-left: 5rpx;
+  width: 660rpx;
   display: flex;
   flex-direction: row;
   margin-top: 20rpx;
 }
 
 .btn-edit {
-  margin-right: 20rpx;
+  margin-right: 30rpx;
   color: #5cacee;
 }
 
@@ -151,11 +161,11 @@
 .swiper-tab {
   width: 750rpx;
   text-align: center;
-  line-height: 80rpx;
+  line-height: 40px;
 }
 
 .swiper-tab-list {
-  font-size: 30rpx;
+  font-size: 15px;
   display: inline-block;
   width: 187.5rpx;
   color: #777;

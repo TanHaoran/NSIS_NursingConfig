@@ -4,20 +4,18 @@
  */
 var service = {
     jscodeToSession: 'https://api.weixin.qq.com/sns/jscode2session',
-    nursingConfig: 'http://NSIS_NursingConfig.service',
-    ip: 'http://125.76.225.7:8686/',
-    qrCodeService: 'http://qr.topscan.com/api.php?w=275&text='
+    ip: 'https://nsisapply.buzzlysoft.com'
 }
 
 /**
  * 服务方法
  */
 var method = {
-    insertApplication: 'api/NSISAppInfor/Insert',
-    getApplication: 'api/NSISAppInfor/GetAppInfo',
-    updateApplication: 'api/NSISAppInfor/Update',
-    deleteApplication: 'api/NSISAppInfor/Delete',
-    getQrCode: 'api/NSISAppQRCode/GetJsonInfo'
+    insertApplication: '/api/NSISAppInfor/Insert',
+    getApplication: '/api/NSISAppInfor/GetAppInfo',
+    updateApplication: '/api/NSISAppInfor/Update',
+    deleteApplication: '/api/NSISAppInfor/Delete',
+    getQrCode: '/api/NSISAppQRCode/GetJsonInfo'
 }
 
 /**

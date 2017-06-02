@@ -14,9 +14,10 @@ Page({
             0, 1, 2, 3
         ],
         // 用来设置列表显示区域的高度
-        winHeight: 0,
+        scollHeight: 0,
         // tab切换 
         currentTab: 0,
+        currentCount: 0,
         qrCodeTitle: ''
     },
 
@@ -30,7 +31,7 @@ Page({
         wx.getSystemInfo({
             success: function (res) {
                 history.setData({
-                    winHeight: res.windowHeight
+                    scollHeight: res.windowHeight - 41
                 });
             }
         });
@@ -38,8 +39,8 @@ Page({
 
     // 滑动切换tab 
     bindChange: function (e) {
-        var history = this;
-        history.setData({ currentTab: e.detail.current });
+        this.setData({ currentTab: e.detail.current });
+        this.getApplications();
     },
     // 点击tab切换 
     swichNavigation: function (e) {
@@ -50,6 +51,7 @@ Page({
                 currentTab: e.target.dataset.current
             })
         }
+        this.getApplications();
     },
 
     // 读取所有申请
@@ -85,6 +87,7 @@ Page({
             },
             complete: function () {
                 wx.hideLoading();
+                wx.stopPullDownRefresh();
             }
         });
     },
@@ -103,16 +106,21 @@ Page({
         if (data) {
             // 首先清空数据
             this.data.applications.splice(0, this.data.applications.length);
+            this.data.currentCount = 0;
             for (var i = data.length - 1; i >= 0; i--) {
                 var date = data[i].App_Date;
                 date = date.replace('T', ' ');
                 var length = date.length;
                 date = date.substring(0, length - 4);
                 data[i].App_Date = date;
-                this.data.applications.push(data[i]);
+                if (data[i].State == this.data.currentTab) {
+                    this.data.applications.push(data[i]);
+                    this.data.currentCount++;
+                }
             }
             this.setData({
-                applications: this.data.applications
+                applications: this.data.applications,
+                currentCount: this.data.currentCount
             });
         }
     },
@@ -171,6 +179,7 @@ Page({
 
     // 点击小二维码
     onQrCode: function (e) {
+        var history = this;
         var index = e.currentTarget.dataset.index;
         var application = this.data.applications[index];
         var url = commonValue.service.ip + commonValue.method.getQrCode + '?ApplicationID=' + application.ApplicationID;
@@ -180,10 +189,13 @@ Page({
         console.log('url是：' + url);
         console.log('请求id是：' + application.ApplicationID);
 
+
         // 设置二维码的数据
-        this.setQrCodeData(url);
+        history.setQrCodeData(url);
         // 显示大二维码
-        this.bigQrCode(e);
+        history.bigQrCode(e);
+
+        
     },
 
 
@@ -193,6 +205,7 @@ Page({
     setQrCodeData: function (url) {
         // 先清空数据
         this.data.qrCodeUrls.splice(0, this.data.qrCodeUrls.length);
+        console.log(url);
         this.data.qrCodeUrls.push(url);
         this.setData({
             qrCodeTitle: this.data.qrCodeTitle,

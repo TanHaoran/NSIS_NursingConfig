@@ -9,9 +9,7 @@ Page({
     onLoad: function(option) {
         console.log("医院：" + option.hospital);
         console.log("科室：" + option.office);
-        wx.showToast({
-            title: option.hospital + option.office,
-        })
+
         var index = this;
         // 获取用户信息
         wx.getUserInfo({
@@ -30,11 +28,32 @@ Page({
             }
         });
     },
+
     // 点击申请按钮
     onApply: function() {
         wx.navigateTo({
             url: '../apply/apply',
         })
 
+    },
+
+    // 页面分享设置
+    onShareAppMessage: function () {
+        return {
+            title: 'NSIS智护+',
+            path: '/pages/index/index',
+            success: function (res) {
+                // 转发成功
+                wx.showToast({
+                    title: '转发成功',
+                });
+            },
+            fail: function (res) {
+                // 转发失败
+                wx.showToast({
+                    title: '转发失败',
+                });
+            }
+        }
     }
 })

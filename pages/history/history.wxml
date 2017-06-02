@@ -5,12 +5,13 @@
   <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNavigation">审核通过</view>
   <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichNavigation">审核失败</view>
 </view>
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 50}}px" bindchange="bindChange">
-  <block wx:for="{{navigations}}" wx:key="*this">
+<view class="empty-message" wx:if="{{currentCount==0}}">列表为空</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{scollHeight}}px" bindchange="bindChange">
+  <block wx:for="{{navigations}}">
     <swiper-item>
       <scroll-view scroll-y class="container">
         <block wx:for="{{applications}}">
-          <view class="item" wx:if="{{item.State==currentTab}}">
+          <view class="item">
 
             <view class="item-line">
               <text class="item-text">申请人：</text>
@@ -70,7 +71,7 @@
 
               <!--二维码滚动区域-->
               <swiper class="big-qr-code-content" indicator-dots="true">
-                <block wx:for="{{qrCodeUrls}}" wx:for-item="url" wx:key="*this">
+                <block wx:for="{{qrCodeUrls}}" wx:for-item="url">
                   <swiper-item>
                     <image class="big-qr-code" mode="aspectFit" src="{{url}}" />
                   </swiper-item>
