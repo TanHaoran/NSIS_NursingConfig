@@ -53,7 +53,7 @@
 }
 
 .item-desc {
-  width: 520rpx;
+  width: 500rpx;
   line-height: 60rpx;
   font-size: 18px;
   text-align: left;

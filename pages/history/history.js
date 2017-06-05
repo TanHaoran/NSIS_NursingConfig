@@ -37,6 +37,12 @@ Page({
         });
     },
 
+
+
+    onShow: function () {
+        this.getApplications();
+    },
+
     // 滑动切换tab 
     bindChange: function (e) {
         this.setData({ currentTab: e.detail.current });

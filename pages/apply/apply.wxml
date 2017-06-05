@@ -3,48 +3,54 @@
   <view class="pop-error" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
   <view class="line">
     <view>
-    <text class="line-text">医院名</text>
-    <text class="line-not-null">*</text>
+      <text class="line-text">医院名</text>
+      <text class="line-not-null">*</text>
     </view>
-    <input class="line-input" type="text" name="hospital" value="{{hospital}}"/>
+    <picker mode="selector" bindchange="hospitalChange" range="{{hospitals}}" range-key="{{'HName'}}" value="{{hospitalIndex}}">
+    
+      <view class="line-input" >{{hospitals[hospitalIndex].HName}}</view>
+    </picker>
   </view>
 
   <view class="line">
     <view>
-    <text class="line-text">科室</text>
-    <text class="line-not-null">*</text>
+      <text class="line-text">科室</text>
+      <text class="line-not-null">*</text>
     </view>
-    <input class="line-input" type="text" name="office" value="{{office}}"/>
+     <picker mode="selector" bindchange="officeChange" range="{{offices}}" range-key="{{'ItemOfficeName'}}" value="{{officeIndex}}">
+    
+      <view class="line-input" >{{offices[officeIndex].ItemOfficeName}}</view>
+    </picker>
   </view>
 
   <view class="line">
     <view>
-    <text class="line-text">申请人</text>
-    <text class="line-not-null">*</text>
+      <text class="line-text">申请人</text>
+      <text class="line-not-null">*</text>
     </view>
-    <input class="line-input" type="text" name="applicant" value="{{applicant}}"/>
+    <input class="line-input" type="text" name="applicant" value="{{applicant}}" />
   </view>
 
   <view class="line">
     <view>
-    <text class="line-text">联系电话</text>
-    <text class="line-not-null">*</text>
+      <text class="line-text">联系电话</text>
+      <text class="line-not-null">*</text>
     </view>
-    <input class="line-input" type="number" name="telephone" placeholder="{{telePhoneHint}}" placeholder-class="line-telephone-hint" value="{{telephone}}"/>
+    <input class="line-input" type="number" name="telephone" placeholder="{{telePhoneHint}}" placeholder-class="line-telephone-hint" value="{{telephone}}" />
   </view>
 
   <view class="line">
     <view>
-    <text class="line-text">申请项目</text>
-    <text class="line-not-null">*</text>
+      <text class="line-text">申请项目</text>
+      <text class="line-not-null">*</text>
     </view>
-    <input class="line-input" type="text" name="name"  value="{{name}}"/>
+    <input class="line-input" type="text" name="name" value="{{name}}" />
   </view>
 
   <view class="line">
     <text class="line-text">描述</text>
     <text class="line-not-null">*</text>
-    <textarea class="line-textarea" name="desc" value="{{desc}}"/>
+    <textarea class="line-textarea" name="desc" value="{{desc}}" />
   </view>
 
   <button form-type="submit" type="primary">提交</button>

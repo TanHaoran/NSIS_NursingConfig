@@ -12,6 +12,38 @@ function checkPhone(phone) {
     }
 }
 
+/**
+ * 保存已选择的医院
+ */
+function saveHospitalName(hospitalName) {
+    wx.setStorageSync('hospitalName', hospitalName);
+}
+
+/**
+ * 保存已选择的科室
+ */
+function saveOfficeName(officeName) {
+    wx.setStorageSync('officeName', officeName);
+}
+
+/**
+ * 获取已保存的医院
+ */
+function loadHospitalName() {
+    return wx.getStorageSync('hospitalName');
+}
+
+/**
+ * 获取已保存的科室
+ */
+function loadOfficeName() {
+    return wx.getStorageSync('officeName');
+}
+
 module.exports = {
-    checkPhone: checkPhone
+    checkPhone: checkPhone,
+    saveHospitalName: saveHospitalName,
+    saveOfficeName: saveOfficeName,
+    loadHospitalName: loadHospitalName,
+    loadOfficeName: loadOfficeName
 }

@@ -15,7 +15,9 @@ var method = {
     getApplication: '/api/NSISAppInfor/GetAppInfo',
     updateApplication: '/api/NSISAppInfor/Update',
     deleteApplication: '/api/NSISAppInfor/Delete',
-    getQrCode: '/api/NSISAppQRCode/GetJsonInfo'
+    getQrCode: '/api/NSISAppQRCode/GetJsonInfo',
+    getHospitalList: '/api/Hospital/GetHospitalList',
+    getOfficeList: '/api/ItemOffice/GetItemOfficeList'
 }
 
 /**

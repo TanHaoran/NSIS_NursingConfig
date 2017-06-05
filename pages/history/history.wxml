@@ -41,12 +41,14 @@
               <text class="item-content item-state-denied item-state" wx:if="{{item.State==3}}">审核失败</text>
               <!--审核通过之后会出现二维码的图标-->
               <image class="qr-code" src="{{qrCodeSrc}}" wx:if="{{item.State==2}}" bindtap="onQrCode" data-status="open" data-index="{{index}}" />
-            </view>
+            </view>           
 
+            
             <view class="item-line" wx:if="{{item.State==3}}">
               <text class="item-text">说明：</text>
               <text class="item-desc item-fail-info">{{item.Prompt}}</text>
             </view>
+
 
             <!--如果是待审核状态，会出现2个按钮-->
             <view class="button-group" wx:if="{{item.State==0}}">
